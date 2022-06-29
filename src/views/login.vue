@@ -12,16 +12,16 @@
         <el-select v-model="type" placeholder="请选择账号类型">
           <el-option
               v-for="item in [{
-        value: '选项1',
+        value: 'A',
         label: '学生'
       }, {
-        value: '选项2',
+        value: 'B',
         label: '教师'
       }, {
-        value: '选项3',
+        value: 'C',
         label: '教材发行人员'
       }, {
-        value: '选项4',
+        value: 'D',
         label: '采购人员'
       }]"
               :key="item.value"
@@ -31,13 +31,13 @@
         </el-select>
         </el-form-item>
         <el-form-item label="账号" prop="username">
-          <el-input type="text" v-model="input1"  autocomplete="off"></el-input>
+          <el-input type="text" v-model="account"  autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="input2" autocomplete="off"></el-input>
+          <el-input type="password" v-model="pwd" autocomplete="off" show-password ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button style="width: 100%"  @click="login" type="primary">立即登录</el-button>
+          <el-button style="width: 100%" @click="uploadForm" type="primary">立即登录</el-button>
         </el-form-item>
         <el-form-item>
           <el-button style="width: 100%" @click="register" type="primary">用户注册</el-button>
@@ -48,49 +48,87 @@
 </template>
 
 
-<script  setup>
-import axios from 'axios'
-import { reactive, ref, toRefs } from 'vue'
-const type = ref('')
-const input1 = ref('')
-const input2 = ref('')
-const login = async () => {
-    var flag=1
-  if(type.value=='') {
-    alert('请选择账户类型!')
-    flag=0
-  }
-    else if(input1.value=='') {
-      alert('请输入用户名!')
-      flag=0
+<!--<script  setup>-->
+<!--import axios from 'axios'-->
+<!--import { reactive, ref, toRefs } from 'vue'-->
+<!--const type = ref('')-->
+<!--const input1 = ref('')-->
+<!--const input2 = ref('')-->
+
+<!--const login = async () => {-->
+<!--    var flag=1-->
+<!--  if(type.value=='') {-->
+<!--    alert('请选择账户类型!')-->
+<!--    flag=0-->
+<!--  }-->
+<!--    else if(input1.value=='') {-->
+<!--      alert('请输入用户名!')-->
+<!--      flag=0-->
+<!--    }-->
+<!--    else if(input2.value=='') {-->
+<!--      alert('请输入密码!')-->
+<!--      flag=0-->
+<!--    }-->
+<!--  if (flag==1) {-->
+<!--    axios-->
+<!--        .post('/login', {-->
+<!--      type: type.value || '',-->
+<!--      userName: input1.value || '',-->
+<!--      password: input2.value-->
+<!--    }).then(function (response) {-->
+<!--      console.log(response.data);-->
+<!--    }).catch(function (error) {-->
+<!--          console.log(error);-->
+<!--        });-->
+<!--    axios-->
+<!--        .get('/login?type').then(function (response) {-->
+<!--      console.log(response.data);-->
+<!--    }).catch(function (error) {-->
+<!--      console.log(error);-->
+<!--    });-->
+<!--}}-->
+<!--const register = async () => {-->
+<!--  alert('redister!')-->
+<!--}-->
+<!--</script>-->
+<script>
+
+export default {
+  name: "Login",
+  data() {
+    return {
+      account: '',
+      pwd: '',
+      type:'',
+      status:''
     }
-    else if(input2.value=='') {
-      alert('请输入密码!')
-      flag=0
+  },
+    methods: {
+      uploadForm(event)
+      {
+        console.log(this.account);
+        console.log(this.pwd);
+        console.log(this.type);
+      },
+      sendData()
+      {
+        const that = this;
+        this.$axios({
+          method:'get',
+          url:'\'http://127.0.0.1:8181/userlogin/',
+          params:{
+            username:this.account,
+            pwd:this.pwd,
+            type:this.type
+          }
+        }).then(function (data){
+          that.status = data.data;
+          console.log(that.status);
+        })
+      }
     }
-  if (flag==1) {
-    axios
-        .post('/login', {
-      type: type.value || '',
-      userName: input1.value || '',
-      password: input2.value
-    }).then(function (response) {
-      console.log(response.data);
-    }).catch(function (error) {
-          console.log(error);
-        });
-    axios
-        .get('/login?type').then(function (response) {
-      console.log(response.data);
-    }).catch(function (error) {
-      console.log(error);
-    });
-}}
-const register = async () => {
-  alert('redister!')
 }
 </script>
-
 <style scoped>
 .login-body {
   display: flex;
