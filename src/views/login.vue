@@ -121,7 +121,7 @@ export default {
         //const { proxy } = getCurrentInstance();
         axios({
           method:'get',
-          url:'\'http://127.0.0.1:8181/userlogin/',
+          url:'http://127.0.0.1:8181/userlogin/',
           params:{
             username:this.account,
             pwd:this.pwd,
