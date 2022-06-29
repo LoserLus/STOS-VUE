@@ -2,10 +2,10 @@
   <el-container class="layout-container-demo" style="height: 500px">
     <el-aside width="200px">
       <el-scrollbar>
-        <el-menu :default-openeds="['1', '3']">
+        <el-menu :default-openeds="[]">
           <el-sub-menu index="1">
             <template #title>
-              <el-icon><message /></el-icon>Navigator One
+              <el-icon><message /></el-icon>订购书籍
             </template>
             <el-menu-item-group>
               <template #title>Group 1</template>
@@ -22,7 +22,7 @@
           </el-sub-menu>
           <el-sub-menu index="2">
             <template #title>
-              <el-icon><icon-menu /></el-icon>Navigator Two
+              <el-icon><icon-menu /></el-icon>查询订书书籍
             </template>
             <el-menu-item-group>
               <template #title>Group 1</template>
@@ -39,7 +39,7 @@
           </el-sub-menu>
           <el-sub-menu index="3">
             <template #title>
-              <el-icon><setting /></el-icon>Navigator Three
+              <el-icon><setting /></el-icon>删除订购书籍
             </template>
             <el-menu-item-group>
               <template #title>Group 1</template>
@@ -54,6 +54,11 @@
               <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
             </el-sub-menu>
           </el-sub-menu>
+          <el-sub-menu index="4">
+            <template #title>
+              <el-icon><message /></el-icon>查询领书单
+            </template>
+          </el-sub-menu>
         </el-menu>
       </el-scrollbar>
     </el-aside>
@@ -67,13 +72,12 @@
             /></el-icon>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
+                <el-dropdown-item>登录</el-dropdown-item>
+                <el-dropdown-item>注册</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-          <span>Tom</span>
+          <span>账户</span>
         </div>
       </el-header>
 
