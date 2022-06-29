@@ -93,6 +93,9 @@
 <!--</script>-->
 <script>
 
+import {getCurrentInstance} from "vue";
+import axios from "axios";
+
 export default {
   name: "Login",
   data() {
@@ -109,11 +112,14 @@ export default {
         console.log(this.account);
         console.log(this.pwd);
         console.log(this.type);
+        this.sendData();
       },
       sendData()
       {
         const that = this;
-        this.$axios({
+
+        //const { proxy } = getCurrentInstance();
+        axios({
           method:'get',
           url:'\'http://127.0.0.1:8181/userlogin/',
           params:{
