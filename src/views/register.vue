@@ -115,11 +115,11 @@ export default {
         method: 'post',
         url: 'http://127.0.0.1:8181/user/register/',
         params: {
-          userid: this.userid,
-          name: this.username,
-          department: this.department,
-          tel: this.tel,
-          pwd: this.pwd
+          userid: this.userid,//编号
+          name: this.username,//姓名
+          department: this.department,//学院
+          tel: this.tel,//联系方式
+          pwd: this.pwd//密码
         }
       }).then(function (data) {
         var list = eval(data.data);
