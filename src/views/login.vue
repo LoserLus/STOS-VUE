@@ -8,7 +8,7 @@
         </div>
       </div>
       <el-form label-position="top" rules="rules" class="login-form">
-        <el-form-item label="账号类型" prop="username">
+        <el-form-item label="账号类型" >
         <el-select v-model="type" placeholder="请选择账号类型">
           <el-option
               v-for="item in [{
@@ -30,7 +30,7 @@
           </el-option>
         </el-select>
         </el-form-item>
-        <el-form-item label="账号" prop="username">
+        <el-form-item label="账号" >
           <el-input type="text" v-model="account"  autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
@@ -114,6 +114,9 @@ export default {
         console.log(this.type);
         this.sendData();
       },
+      register(event){
+        this.$router.push('/register');
+      },
       sendData()
       {
         const that = this;
@@ -121,7 +124,7 @@ export default {
         //const { proxy } = getCurrentInstance();
         axios({
           method:'get',
-          url:'http://127.0.0.1:8181/userlogin/',
+          url:'http://127.0.0.1:8181/user/login/',
           params:{
             username:this.account,
             pwd:this.pwd,
@@ -129,13 +132,23 @@ export default {
           }
         }).then(function (data){
           that.status = data.data;
-          console.log(that.status);
+          console.log(data.status);
+          if(data.status==200) {
+            if(that.type=='A'||that.type=='B')
+            that.$router.push('/student');
+            else  if(that.type=='C')
+              that.$router.push('/Issuer');
+            else  if(that.type=='D')
+              that.$router.push('/buyer');
+          }
+          else
+            alert('登陆失败！');
         })
       }
     }
 }
 </script>
-<style scoped>
+<style>
 .login-body {
   display: flex;
   justify-content: center;

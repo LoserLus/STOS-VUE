@@ -1,38 +1,10 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/st">st</router-link> |
     <router-link to="/login">login</router-link>|
     <router-link to="/register">register</router-link>
   </nav>
   <router-view/>
-<!--  <template>-->
-<!--    <div class="login-body">-->
-<!--      <div class="login-container">-->
-<!--        <div class="head">-->
-<!--          <div class="name">-->
-<!--            <div class="title">学校教材管理系统 </div>-->
-<!--            <div class="tips">Vue3.0 后台管理系统</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <el-form label-position="top"  ref="loginForm" class="login-form">-->
-<!--          <el-form-item label="账号" prop="username">-->
-<!--            <el-input type="text" autocomplete="off"></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-form-item label="密码" prop="password">-->
-<!--            <el-input type="password"  autocomplete="off"></el-input>-->
-<!--          </el-form-item>-->
-<!--          <el-form-item>-->
-<!--            <el-button style="width: 100%" type="primary">立即登录</el-button>-->
-<!--          </el-form-item>-->
-<!--          <el-form-item>-->
-<!--            <el-button style="width: 100%" type="primary">用户注册</el-button>-->
-<!--          </el-form-item>-->
-<!--        </el-form>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </template>-->
+
 
 </template>
 
