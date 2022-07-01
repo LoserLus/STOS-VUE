@@ -47,50 +47,6 @@
   </div>
 </template>
 
-
-<!--<script  setup>-->
-<!--import axios from 'axios'-->
-<!--import { reactive, ref, toRefs } from 'vue'-->
-<!--const type = ref('')-->
-<!--const input1 = ref('')-->
-<!--const input2 = ref('')-->
-
-<!--const login = async () => {-->
-<!--    var flag=1-->
-<!--  if(type.value=='') {-->
-<!--    alert('请选择账户类型!')-->
-<!--    flag=0-->
-<!--  }-->
-<!--    else if(input1.value=='') {-->
-<!--      alert('请输入用户名!')-->
-<!--      flag=0-->
-<!--    }-->
-<!--    else if(input2.value=='') {-->
-<!--      alert('请输入密码!')-->
-<!--      flag=0-->
-<!--    }-->
-<!--  if (flag==1) {-->
-<!--    axios-->
-<!--        .post('/login', {-->
-<!--      type: type.value || '',-->
-<!--      userName: input1.value || '',-->
-<!--      password: input2.value-->
-<!--    }).then(function (response) {-->
-<!--      console.log(response.data);-->
-<!--    }).catch(function (error) {-->
-<!--          console.log(error);-->
-<!--        });-->
-<!--    axios-->
-<!--        .get('/login?type').then(function (response) {-->
-<!--      console.log(response.data);-->
-<!--    }).catch(function (error) {-->
-<!--      console.log(error);-->
-<!--    });-->
-<!--}}-->
-<!--const register = async () => {-->
-<!--  alert('redister!')-->
-<!--}-->
-<!--</script>-->
 <script>
 
 import {getCurrentInstance} from "vue";
@@ -150,14 +106,13 @@ export default {
 }
 </script>
 <style>
-.login-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: #fff;
-  /* background-image: linear-gradient(25deg, #077f7c, #3aa693, #5ecfaa, #7ffac2); */
-}
+/*.login-body {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  width: 100%;*/
+/*  background-color: #fff;*/
+/*}*/
 .login-container {
   width: 420px;
   height: 500px;
