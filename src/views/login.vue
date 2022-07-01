@@ -143,7 +143,7 @@ export default {
               that.$router.push('/buyer');
           }
           else
-            alert('登陆失败！');
+            alert('登录失败！');
         })
       }
     }

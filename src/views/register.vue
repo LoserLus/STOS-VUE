@@ -13,10 +13,10 @@
         <el-form-item label="姓名">
           <el-input type="text" v-model="username" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="学院" >
-        <el-select v-model="department" placeholder="请选择账号类型">
-        <el-option
-            v-for="item in [{
+        <el-form-item label="学院">
+          <el-select v-model="department" placeholder="请选择账号类型">
+            <el-option
+                v-for="item in [{
         value: 'A',
         label: '计算机学院'
       }, {
@@ -29,12 +29,12 @@
         value: 'D',
         label: '经管学院'
       }]"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
- >
-        </el-option>
-        </el-select>
+                :key="item.value"
+                :label="item.label"
+                :value="item.label"
+            >
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="联系方式">
           <el-input type="text" v-model="tel" autocomplete="off"></el-input>
@@ -64,7 +64,7 @@ export default {
       userid: '',
       username: '',
       department: '',
-      tel:'',
+      tel: '',
       pwd: '',
       pwd2: ''
     }
@@ -103,28 +103,32 @@ export default {
       console.log(this.department);
       console.log(this.pwd);
       console.log(this.pwd2);
-      if(flag==1){
+      if (flag == 1) {
         this.sendData();
       }
     },
-    sendData()
-    {
+    sendData() {
       const that = this;
 
       //const { proxy } = getCurrentInstance();
       axios({
-        method:'post',
-        url:'http://127.0.0.1:8181/user/register/',
-        params:{
-          username:this.userid,
-          name:this.username,
-          department:this.department,
-          tel:this.tel,
-          pwd:this.pwd
+        method: 'post',
+        url: 'http://127.0.0.1:8181/user/register/',
+        params: {
+          userid: this.userid,
+          name: this.username,
+          department: this.department,
+          tel: this.tel,
+          pwd: this.pwd
         }
-      }).then(function (data){
+      }).then(function (data) {
+        var list = eval(data.data);
         that.status = data.data;
-        console.log(that.status);
+        console.log(list.data);//list.data中为后台返回的注册结果
+        if (list.data == '注册成功') {
+          that.$router.push('/login');
+        } else
+          alert('注册失败！');
       })
     }
   }
