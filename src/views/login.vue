@@ -131,9 +131,10 @@ export default {
             type:this.type
           }
         }).then(function (data){
+          var list = eval(data.data);
           that.status = data.data;
-          console.log(data.status);
-          if(data.status==200) {
+          console.log(list.data);//list.data中为后台返回的登录结果
+          if(list.data=='登录成功') {
             if(that.type=='A'||that.type=='B')
             that.$router.push('/student');
             else  if(that.type=='C')
