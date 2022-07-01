@@ -1,11 +1,12 @@
 <template>
   <div id="app">
+    <button @click="jump">toHome</button>
   </div>
 </template>
 <script>
 import axios from "axios";
 export default {
-  name: "app",
+  name: "st",
   data() {
     return {
       itemList: []
@@ -21,6 +22,9 @@ export default {
       }, response => {
         console.log("error");
       });
+    },
+    jump(event){
+      this.$router.push('/');
     }
   }
 }

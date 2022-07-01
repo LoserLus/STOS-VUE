@@ -8,16 +8,16 @@
       </div>
       <el-form label-position="top" rules="rules" class="register-form">
         <el-form-item label="账号" prop="username">
-          <el-input type="text" v-model="input1"  autocomplete="off"></el-input>
+          <el-input type="text" v-model="username"  autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="input2" autocomplete="off"></el-input>
+          <el-input type="password" v-model="pwd" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="password">
-          <el-input type="password" v-model="input3" autocomplete="off"></el-input>
+          <el-input type="password" v-model="pwd2" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button style="width: 100%"  @click="register" type="primary">立即注册</el-button>
+          <el-button style="width: 100%"  @click="printinfo" type="primary">立即注册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -25,40 +25,57 @@
 </template>
 
 
-<script  setup>
+<script>
 import axios from 'axios'
-import { reactive, ref, toRefs } from 'vue'
-const input1 = ref('')
-const input2 = ref('')
-const input3 = ref('')
-const register = async () => {
-  var flag=1
-  if(input1.value=='') {
-    alert('请输入用户名!')
-    flag=0
+//import { reactive, ref, toRefs } from 'vue'
+// const input1 = ref('')
+// const input2 = ref('')
+// const input3 = ref('')
+// const register = async () => {
+//   var flag=1
+//   if(input1.value=='') {
+//     alert('请输入用户名!')
+//     flag=0
+//   }
+//   else if(input2.value=='') {
+//     alert('请输入密码!')
+//     flag=0
+//   }
+//   else if(input3.value=='') {
+//     alert('请输入确认密码!')
+//     flag=0
+//   }
+//   else if(input2.value!=input3.value) {
+//     alert('密码不一致!')
+//     flag=0
+//   }
+//   if (flag==1) {
+//     axios.post('/register', {
+//       userName: input1.value || '',
+//       password: input2.value
+//     })
+//      {
+//     alert('注册失败!!')
+//     return false;
+//   }
+// }}
+export default {
+  name:'register',
+  data(){
+    return {
+      username:'',
+      pwd:'',
+      pwd2:''
+    }
+  },
+  methods:{
+    printinfo(event){
+      console.log(this.username);
+      console.log(this.pwd);
+      console.log(this.pwd2);
+    }
   }
-  else if(input2.value=='') {
-    alert('请输入密码!')
-    flag=0
-  }
-  else if(input3.value=='') {
-    alert('请输入确认密码!')
-    flag=0
-  }
-  else if(input2.value!=input3.value) {
-    alert('密码不一致!')
-    flag=0
-  }
-  if (flag==1) {
-    axios.post('/register', {
-      userName: input1.value || '',
-      password: input2.value
-    })
-     {
-    alert('注册失败!!')
-    return false;
-  }
-}}
+}
 </script>
 
 <style scoped>
