@@ -1,11 +1,19 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header>Header</el-header>
+      <el-header>采购人员</el-header>
       <el-container>
         <el-aside >
           <el-scrollbar>
-          <el-menu :default-openeds="['1']">
+          <el-menu :default-openeds="['1']"
+                   active-text-color="#ffd04b"
+                   background-color="#545c64"
+                   class="el-menu-vertical-demo"
+                   default-active="2"
+                   text-color="#fff"
+                   @open="handleOpen"
+                   @close="handleClose"
+          >
             <el-sub-menu index="1">
               <template #title>
                 <el-icon><message /></el-icon>Navigator One
@@ -36,7 +44,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 const tableData = [
   {
     date: '2016-05-03',
@@ -74,6 +82,13 @@ const tableData = [
     address: 'No. 189, Grove St, Los Angeles',
   },
 ]
+
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
 </script>
 
 <style>
@@ -89,11 +104,12 @@ const tableData = [
   height: 500px;
 }
 .el-main{
-  background-color: rgb(236,245,255);
+  background-color: #545c64;
   margin-right: 3%;
 }
 .el-table{
   height: 90%;
   width: 100%;
 }
+
 </style>
