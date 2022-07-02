@@ -8,13 +8,13 @@
       </div>
       <el-form label-position="top" class="register-form">
         <el-form-item label="账号">
-          <el-input type="text" v-model="userid" autocomplete="off"></el-input>
+          <el-input type="text" v-model="dgzUser.dgzUsername" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="姓名">
-          <el-input type="text" v-model="username" autocomplete="off"></el-input>
+          <el-input type="text" v-model="dgzUser.dgzName" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="学院">
-          <el-select v-model="department" placeholder="请选择账号类型">
+          <el-select v-model="dgzUser.dgzDept" placeholder="请选择账号类型">
             <el-option
                 v-for="item in [{
         value: 'A',
@@ -37,10 +37,10 @@
           </el-select>
         </el-form-item>
         <el-form-item label="联系方式">
-          <el-input type="text" v-model="tel" autocomplete="off"></el-input>
+          <el-input type="text" v-model="dgzUser.dgzTel" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input type="password" v-model="pwd" autocomplete="off"></el-input>
+          <el-input type="password" v-model="dgzUser.dgzPassword" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="确认密码">
           <el-input type="password" v-model="pwd2" autocomplete="off"></el-input>
@@ -61,11 +61,14 @@ export default {
   name: 'register',
   data() {
     return {
-      userid: '',
-      username: '',
-      department: '',
-      tel: '',
-      pwd: '',
+      //前后端的对象字段名保持一致
+      dgzUser:{
+        dgzUsername: '',
+        dgzPassword: '',
+        dgzName: '',
+        dgzDept: '',
+        dgzTel: '',
+      },
       pwd2: ''
     }
   },
@@ -76,32 +79,29 @@ export default {
       let flag = 1;
       {
 
-        if (this.userid == '') {
+        if (this.dgzUser.dgzUsername == '') {
+          alert('请输入账号!')
+          flag = 0
+        } else if (this.dgzUser.dgzName == '') {
           alert('请输入用户名!')
           flag = 0
-        } else if (this.username == '') {
-          alert('请输入用户名!')
-          flag = 0
-        } else if (this.department == '') {
+        } else if (this.dgzUser.dgzDept == '') {
           alert('请选择院系!')
           flag = 0
-        } else if (this.pwd == '') {
+        } else if (this.dgzUser.dgzPassword == '') {
           alert('请输入密码!')
           flag = 0
         } else if (this.pwd2 == '') {
           alert('请输入确认密码!')
           flag = 0
-        } else if (this.pwd != this.pwd2) {
+        } else if (this.dgzUser.dgzPassword != this.pwd2) {
           alert('密码不一致!')
           flag = 0
         }
       }
       console.log(flag);
 
-      console.log(this.userid);
-      console.log(this.username);
-      console.log(this.department);
-      console.log(this.pwd);
+      console.log(this.dgzUser);
       console.log(this.pwd2);
       if (flag == 1) {
         this.sendData();
@@ -114,13 +114,10 @@ export default {
       axios({
         method: 'post',
         url: 'http://127.0.0.1:8181/user/register/',
-        params: {
-          userid: this.userid,//编号
-          name: this.username,//姓名
-          department: this.department,//学院
-          tel: this.tel,//联系方式
-          pwd: this.pwd//密码
-        }
+        headers:{
+          'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
+        },
+        data:JSON.stringify(this.dgzUser) //转换为json对象
       }).then(function (data) {
         var list = eval(data.data);
         that.status = data.data;
