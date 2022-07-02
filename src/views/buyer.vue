@@ -4,34 +4,24 @@
       <el-header>采购人员</el-header>
       <el-container>
         <el-aside >
-          <el-scrollbar>
-          <el-menu :default-openeds="['1']"
-                   active-text-color="#ffd04b"
-                   background-color="#545c64"
-                   class="el-menu-vertical-demo"
-                   default-active="2"
-                   text-color="#fff"
-                   @open="handleOpen"
-                   @close="handleClose"
-          >
-            <el-sub-menu index="1">
-              <template #title>
-                <el-icon><message /></el-icon>Navigator One
-              </template>
-              <el-menu-item-group>
-                <template #title>Group 1</template>
-                <el-menu-item index="1-1">Option 1</el-menu-item>
-              </el-menu-item-group>
-            </el-sub-menu>
-          </el-menu>
-        </el-scrollbar>
+          <div>
+            <a href="http://localhost:8080/buyer.vue#/buyer">缺书单</a>
+          </div>
+          <div>
+            <a href="http://localhost:8080/buyer.vue#/buyer">进书单</a>
+          </div>
+
+
         </el-aside>
         <el-main>
-            <el-table :data="tableData">
-              <el-table-column prop="date" label="Date" width="180" />
-              <el-table-column prop="name" label="Name" width="180" />
-              <el-table-column prop="address" label="Address" />
-            </el-table>
+          <el-table :data="tableData">
+            <el-table-column prop="qs_id" label="缺书单号"  />
+            <el-table-column prop="isbn" label="书号"  />
+            <el-table-column prop="qs_total" label="总数"  />
+            <el-table-column prop="qs_username" label="经办人"  />
+
+
+          </el-table>
           <el-pagination
               :page-size="20"
               :pager-count="20"
@@ -47,40 +37,13 @@
 <script lang="ts" setup>
 const tableData = [
   {
-    date: '2016-05-03',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
+    qs_id:'001',
+    isbn:'456789',
+    qs_total:'10',
+    qs_username:'小王'
+
   },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-08',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-06',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-07',
-    name: 'Tom',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
+
 ]
 
 const handleOpen = (key: string, keyPath: string[]) => {
@@ -93,23 +56,27 @@ const handleClose = (key: string, keyPath: string[]) => {
 
 <style>
 .el-header{
-  background-color: rgb(198,226,255);
-  margin-left: 3%;
-  margin-right: 3%;
+  background-color: #409EFF;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 3%;
+
 }
+
 .el-aside{
   width:20%;
-  /*background-color:rgb(217,236,255);*/
-  margin-left: 3%;
-  height: 500px;
+  background-color: #79bbff;
+  margin-left: 10%;
+  height: 700px;
 }
 .el-main{
-  background-color: #545c64;
-  margin-right: 3%;
+  background-color:  #a0cfff;
+  margin-right: 10%;
 }
 .el-table{
-  height: 90%;
+  height: 94%;
   width: 100%;
+  background-color:  #ecf5ff;
 }
 
 </style>
