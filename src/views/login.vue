@@ -8,10 +8,10 @@
         </div>
       </div>
       <el-form label-position="top" rules="rules" class="login-form">
-        <el-form-item label="账号类型" >
-        <el-select v-model="type" placeholder="请选择账号类型">
-          <el-option
-              v-for="item in [{
+        <el-form-item label="账号类型">
+          <el-select v-model="type" placeholder="请选择账号类型">
+            <el-option
+                v-for="item in [{
         value: 'A',
         label: '学生'
       }, {
@@ -24,17 +24,17 @@
         value: 'D',
         label: '采购人员'
       }]"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value">
-          </el-option>
-        </el-select>
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="账号" >
-          <el-input type="text" v-model="account"  autocomplete="off"></el-input>
+        <el-form-item label="账号">
+          <el-input type="text" v-model="account" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="pwd" autocomplete="off" show-password ></el-input>
+          <el-input type="password" v-model="pwd" autocomplete="off" show-password></el-input>
         </el-form-item>
         <el-form-item>
           <el-button style="width: 100%" @click="uploadForm" type="primary">立即登录</el-button>
@@ -57,51 +57,65 @@ export default {
     return {
       account: '',
       pwd: '',
-      type:'',
-      status:''
+      type: '',
+      status: ''
     }
   },
-    methods: {
-      uploadForm(event)
-      {
-        console.log(this.account);
-        console.log(this.pwd);
-        console.log(this.type);
-        this.sendData();
-      },
-      register(event){
-        this.$router.push('/register');
-      },
-      sendData()
-      {
-        const that = this;
+  methods: {
+    uploadForm(event) {
+      console.log(this.account);
+      console.log(this.pwd);
+      console.log(this.type);
+      this.sendData();
+    },
+    register(event) {
+      this.$router.push('/register');
+    },
+    sendData() {
+      const that = this;
 
-        //const { proxy } = getCurrentInstance();
+      //const { proxy } = getCurrentInstance();
+      if (that.type == 'A' || that.type == 'B') {
+
         axios({
-          method:'get',
-          url:'http://127.0.0.1:8181/user/login/',
-          params:{
-            username:this.account,
-            pwd:this.pwd,
-            type:this.type
+          method: 'get',
+          url: 'http://127.0.0.1:8181/login/userlogin',
+          params: {
+            username: this.account,
+            pwd: this.pwd,
+            type: this.type
           }
-        }).then(function (data){
+        }).then(function (data) {
           var list = eval(data.data);
           that.status = data.data;
           console.log(list.data);//list.data中为后台返回的登录结果
-          if(list.data=='登录成功') {
-            if(that.type=='A'||that.type=='B')
-            that.$router.push('/student');
-            else  if(that.type=='C')
-              that.$router.push('/Issuer');
-            else  if(that.type=='D')
-              that.$router.push('/buyer');
+          if (list.data == '登录成功') {
+              that.$router.push('/student');
+          } else
+            alert('登录失败！');
+        })
+      }
+      else if (that.type == 'C'){
+        axios({
+          method: 'get',
+          url: 'http://127.0.0.1:8181/login/fxlogin',
+          params: {
+            username: this.account,
+            pwd: this.pwd,
+            type: this.type
           }
-          else
+        }).then(function (data) {
+          var list = eval(data.data);
+          that.status = data.data;
+          console.log(list.data);//list.data中为后台返回的登录结果
+          if (list.data == '登录成功') {
+              that.$router.push('/fxmessager');
+          } else
             alert('登录失败！');
         })
       }
     }
+  }
 }
 </script>
 <style>
@@ -119,26 +133,31 @@ export default {
   border-radius: 4px;
   box-shadow: 0px 21px 41px 0px rgba(0, 0, 0, 0.2);
 }
+
 .head {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 40px 0 20px 0;
 }
+
 .head img {
   width: 100px;
   height: 100px;
   margin-right: 20px;
 }
+
 .head .title {
   font-size: 28px;
   color: #1BAEAE;
   font-weight: bold;
 }
+
 .head .tips {
   font-size: 12px;
   color: #999;
 }
+
 .login-form {
   width: 70%;
   margin: 0 auto;
@@ -148,6 +167,7 @@ export default {
 .el-form--label-top .el-form-item__label {
   padding: 0;
 }
+
 .login-form .el-form-item {
   margin-bottom: 12px;
 }
