@@ -2,11 +2,17 @@
   <div class="fxmessager">
     <el-container>
       <el-header>
-        <NavMenu></NavMenu>
+       图书发行人员管理界面
       </el-header>
-      <el-main>
-        <router-view /> <!--路由出口 -->
-      </el-main>
+      <el-container>
+        <el-aside>
+          <NavMenu></NavMenu>
+        </el-aside>
+        <el-main>
+          <router-view></router-view> <!--路由出口 -->
+        </el-main>
+      </el-container>
+
       <el-footer>@STOS-发行人员系统</el-footer>
     </el-container>
 

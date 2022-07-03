@@ -1,18 +1,13 @@
 <template>
   <!--导航菜单组件-->
   <div class="navMenu">
-    <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal"  @select="handleSelect" router >
-
-      <el-submenu index="1">
-        <el-menu-item index="/fxmessager/qslist">缺书单</el-menu-item>
-      </el-submenu>
-
-      <el-submenu index="2">
-        <el-menu-item index="/fxmessager/dglist">领书单</el-menu-item>
-      </el-submenu>
-
+    <el-menu :default-active="$route.path" class="el-menu-fx" @select="handleSelect" router>
+      <el-sub-menu index="1">
+        <template #title>业务处理</template>
+        <el-menu-item index="/fxmessager/dglist">订书业务</el-menu-item>
+        <el-menu-item index="/fxmessager/qslist">缺书业务</el-menu-item>
+      </el-sub-menu>
     </el-menu>
-
   </div>
 </template>
 
