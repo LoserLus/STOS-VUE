@@ -1,50 +1,50 @@
 <template>
   <div class="dglist_class">
     <el-table
-        :data="tableData.filter(data => !search || data.dgz_username.toLowerCase().includes(search.toLowerCase())
-        || data.book_name.toLowerCase().includes(search.toLowerCase()))"
+        :data="tableData.filter(data => !search || data.dgzUsername.toLowerCase().includes(search.toLowerCase())
+        || data.bookName.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%"
-        height="400"
-        max-height="400">
+        height="510"
+        max-height="600">
       <el-table-column
-          width="100"
+          width="120"
           label="订购单号"
-          prop="dg_id">
+          prop="dgId">
       </el-table-column>
       <el-table-column
-          width="100"
+          width="120"
           label="订购者账号"
-          prop="dgz_username">
+          prop="dgzUsername">
       </el-table-column>
       <el-table-column
-          width="130"
+          width="150"
           label="书号"
           prop="isbn">
       </el-table-column>
       <el-table-column
-          width="100"
+          width="150"
           label="书名"
-          prop="book_name">
+          prop="bookName">
       </el-table-column>
       <el-table-column
           width="160"
           label="订购日期"
-          prop="dg_date">
+          prop="dgDate">
       </el-table-column>
       <el-table-column
-          width="80"
+          width="100"
           label="订购总数"
-          prop="dg_total">
+          prop="dgTotal">
       </el-table-column>
       <el-table-column
-          width="80"
+          width="100"
           label="当前库存"
           prop="stock">
       </el-table-column>
       <el-table-column
-          width="80"
+          width="100"
           label="总额"
-          prop="dg_amount">
+          prop="dgAmount">
       </el-table-column>
       <el-table-column
           align="center"
@@ -64,40 +64,62 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name:"dglist",
   data() {
     return {
       tableData: [{
-        dg_id:'DG001',
-        dgz_username:'DGZ001',
-        isbn:'9787100186438',
-        book_name:'《理想国》',
-        dg_date:'2022-06-01 15:43:57',
-        dg_total:'1',
-        stock:'560',
-        dg_amount:'34'
-      },
-        {
-          dg_id:'DG0012',
-          dgz_username:'DGZ002',
-          isbn:'9787201077642',
-          book_name:'《小王子》',
-          dg_date:'2022-06-02 15:46:53',
-          dg_total:'2',
-          stock:'550',
-          dg_amount:'40'
-        }],
+        dgId:'',
+        dgzUsername:'',
+        isbn:'',
+        bookName:'',
+        dgDate:'',
+        dgTotal:'',
+        stock:'',
+        dgAmount:''
+      }],
       search: ''
     }
   },
   methods: {
     provide(index, row) {
       console.log(index, row);
-      if(index.dg_amount<=index.stock)
-        console.log("OK！");
+      if(this.tableData[index].dgAmount<=this.tableData[index].stock){
+        axios.get('http://127.0.0.1:8181/messager/release/',
+            {
+              params:{
+                'bookName':this.tableData[index].bookName,
+                'dgAmount':this.tableData[index].dgAmount,
+                'dgDate':this.tableData[index].dgDate,
+                'dgId':this.tableData[index].dgId,
+                'dgTotal':this.tableData[index].dgTotal,
+                'dgzUsername':this.tableData[index].dgzUsername,
+                'isbn':this.tableData[index].isbn
+              },
+            }
+        ).then((res) => {
+          console.log(res)
+        })
+      }else{
+        alert("库存不足，请补充库存！");
+      }
     }
   },
+  //获取订购单信息
+  created() {
+    const that = this;
+
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8181/messager/dglist/',
+    }).then(function (data) {
+      var list = eval(data.data);
+      console.log(list.data);
+      that.tableData = list.data;
+    })
+  }
 }
 </script>
 

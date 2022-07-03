@@ -78,6 +78,11 @@ const routes = [
         path:'/fxmessager/dglist',
         name:'dglist',
         component:()=>import(/* webpackChunkName: "about" */ '../views/dglist')
+      },
+      {
+        path:'/fxmessager/receivebook',
+        name:'receivebook',
+        component:()=>import(/* webpackChunkName: "about" */ '../views/receivebook')
       }
     ]
   },

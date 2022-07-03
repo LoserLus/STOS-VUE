@@ -6,6 +6,7 @@
         <template #title>业务处理</template>
         <el-menu-item index="/fxmessager/dglist">订书业务</el-menu-item>
         <el-menu-item index="/fxmessager/qslist">缺书业务</el-menu-item>
+        <el-menu-item index="/fxmessager/receivebook">到书信息</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </div>
