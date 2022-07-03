@@ -8,5 +8,5 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import VueAxios from 'vue-axios'
 
-
+axios.defaults.withCredentials = true;
 createApp(App).use(store).use(VueAxios,axios).use(router).use(ElementPlus).mount('#app')
