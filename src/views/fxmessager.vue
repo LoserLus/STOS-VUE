@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import NavMenu from '../views/navmenu';
+import NavMenu from '../views/NavMenu/navmenu';
 
 export default {
   name: "fxmessager",

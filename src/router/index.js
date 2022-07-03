@@ -29,7 +29,20 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/student.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/student.vue'),
+    children:[
+      {
+        path:'/student/book',
+        name:'book',
+        component:()=>import(/* webpackChunkName: "about" */ '../views/book')
+      },
+      {
+        path:'/student/getbook',
+        name:'getbook',
+        component:()=>import(/* webpackChunkName: "about" */ '../views/getbook')
+      }
+    ]
+
   },
   {
     path: '/Issuer',
@@ -66,7 +79,15 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/navmenu')
+    component: () => import(/* webpackChunkName: "about" */ '../views/NavMenu/navmenu')
+  },
+  {
+    path: '/stnavmenu',
+    com: 'stnavmenu',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/NavMenu/stnavmenu')
   }
 ]
 
