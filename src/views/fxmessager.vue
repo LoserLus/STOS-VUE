@@ -5,7 +5,7 @@
        图书发行人员管理界面
       </el-header>
       <el-container>
-        <el-aside>
+        <el-aside width="200px">
           <NavMenu></NavMenu>
         </el-aside>
         <el-main>
