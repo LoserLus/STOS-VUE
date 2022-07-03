@@ -4,6 +4,7 @@
         :data="tableData.filter(data => !search || data.dgz_username.toLowerCase().includes(search.toLowerCase())
         || data.book_name.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%"
+        height="400"
         max-height="400">
       <el-table-column
           width="100"

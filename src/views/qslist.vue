@@ -1,23 +1,32 @@
 <template>
 <div class="qslist">
   <el-table
-      :data="tableData"
-      style="width: 100%">
-    <el-table-column
-        prop="isbn"
-        label="ISBN"
-        width="400">
+      ref="multipleTableRef"
+      :data="tableData.filter(data => !search || data.qs_id.toLowerCase().includes(search.toLowerCase())
+      ||data.book_name.toLowerCase().includes(search.toLowerCase()))"
+      style="width: 100%"
+      height="380"
+
+  >
+    <el-table-column type="selection" width="55" />
+    <el-table-column property="qs_id" label="缺书单号" width="180%"/>
+    <el-table-column property="isbn" label="ISBN" width="280%" />
+    <el-table-column property="book_name" label="书名" width="280%" />
+    <el-table-column property="qs_total" label="数量" width="280%" />
+    <el-table-column property="qs_username" label="经办人" width="280%" />
+    <el-table-column align="center" width="200">
+      <template #header>
+        <el-input
+            v-model="search"
+            size="mini"
+            placeholder=""/>
+      </template>
     </el-table-column>
-    <el-table-column
-        prop="total"
-        label="总数"
-        width="400">
-    </el-table-column>
-    <el-table-column
-        prop="username"
-        label="经办人">
-    </el-table-column>
+
   </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="fun()">采购</el-button>
+  </div>
 </div>
 </template>
 
@@ -27,24 +36,27 @@ export default {
   data() {
     return {
       tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+        qs_id:'QS001',
+        isbn: '9787521737035',
+        book_name: '《中国美术五千年》',
+        qs_total: '50',
+        qs_username:'xiao'
+
+      },
+        { qs_id:'QS002',
+        isbn: '9787572606649',
+        book_name: '《花与药》',
+        qs_total: '20',
+        qs_username:'xiao'}
+      ],
+      search: ''
     }
-  }
+
+  },
+
+fun(){
+
+}
 }
 </script>
 
