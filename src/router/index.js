@@ -40,12 +40,33 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Issuer.vue')
   },
   {
-    path: '/buyer',
-    name: 'buyer',
+    path: '/fxmessager',
+    name: 'fxmessager',
+
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/fxmessager'),
+
+    children:[
+      {
+        path:'/fxmessager/qslist',
+        name:'qslist',
+        component:()=>import(/* webpackChunkName: "about" */ '../views/qslist')
+      },
+      {
+        path:'/fxmessager/dglist',
+        name:'dglist',
+        component:()=>import(/* webpackChunkName: "about" */ '../views/dglist')
+      }
+    ]
+  },
+  {
+    path: '/navmenu',
+    com: 'navmenu',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/buyer.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/navmenu')
   }
 ]
 
