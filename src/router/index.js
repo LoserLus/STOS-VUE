@@ -45,6 +45,22 @@ const routes = [
 
   },
   {
+    path: '/purchaser',
+    name: 'purchaser',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/purchaser'),
+    children:[
+      {
+        path:'/purchaser/jslist',
+        name:'jslist',
+        component:()=>import(/* webpackChunkName: "about" */ '../views/jslist')
+      }
+    ]
+
+  },
+  {
     path: '/fxmessager',
     name: 'fxmessager',
 
@@ -80,6 +96,14 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/NavMenu/stnavmenu')
+  },
+  {
+    path: '/purmenu',
+    com: 'purmenu',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/NavMenu/purmenu')
   }
 ]
 
