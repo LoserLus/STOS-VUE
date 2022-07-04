@@ -109,6 +109,7 @@ export default {
   },
   //获取初始页面
   created() {
+    console.log(sessionStorage);
     const that = this;
     //const { proxy } = getCurrentInstance();
     axios({

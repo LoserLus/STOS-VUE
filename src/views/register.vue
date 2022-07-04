@@ -118,9 +118,9 @@ export default {
           'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
         },
         data:JSON.stringify(this.dgzUser) //转换为json对象
-      }).then(function (data) {
-        var list = eval(data.data);
-        that.status = data.data;
+      }).then(function (response) {
+        var list = eval(response.data);
+        //that.status = data.data;
         console.log(list.data);//list.data中为后台返回的注册结果
         if (list.data == '注册成功') {
           that.$router.push('/login');

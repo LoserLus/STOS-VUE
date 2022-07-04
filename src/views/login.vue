@@ -66,8 +66,8 @@ export default {
       console.log(this.account);
       console.log(this.pwd);
       console.log(this.type);
-      sessionStorage.setItem("username",this.account);
-      console.log(sessionStorage.getItem('username'));
+      // sessionStorage.setItem("username",this.account);
+      // console.log(sessionStorage.getItem('username'));
       this.sendData();
     },
     register(event) {
@@ -81,7 +81,7 @@ export default {
 
         axios({
           method: 'get',
-          url: 'http://127.0.0.1:8181/login/userlogin',
+          url: '/api/login/userlogin',
           params: {
             username: this.account,
             pwd: this.pwd,
@@ -91,11 +91,14 @@ export default {
 
           var list = eval(data.data);
           that.status = data.data;
+          //sessionStorage.
           console.log(list.data);//list.data中为后台返回的登录结果
           if (list.data == '登录成功') {
               that.$router.push('/student');
           } else
             alert('登录失败！');
+          console.log("login session:");
+        console.log(sessionStorage);
         })
       }
       else if (that.type == 'C'){
@@ -106,7 +109,8 @@ export default {
             username: this.account,
             pwd: this.pwd,
             type: this.type
-          }
+          },
+          withCredentials:true
         }).then(function (data) {
           var list = eval(data.data);
           that.status = data.data;
