@@ -16,5 +16,20 @@ module.exports = defineConfig({
       ]
     }
   }
-
 })
+module.exports = {
+  pluginOptions: {
+    proxy: {
+      enabled: true,
+      context: '/api',
+      options: {
+        target: 'http://localhost:8181',
+        changeOrigin: true,
+        ws:true,                                            //websocket
+        pathRewrite:{
+          '^/api':''
+        }
+      }
+    }
+  }
+}
