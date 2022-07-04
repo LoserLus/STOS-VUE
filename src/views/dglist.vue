@@ -4,8 +4,13 @@
         :data="tableData.filter(data => !search || data.dgzUsername.toLowerCase().includes(search.toLowerCase())
         || data.bookName.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%"
+Updated upstream
         height="510"
         max-height="600">
+
+        height="400"
+        max-height="400">
+ Stashed changes
       <el-table-column
           width="120"
           label="订购单号"
