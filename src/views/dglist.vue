@@ -80,7 +80,8 @@ export default {
         stock:'',
         dgAmount:''
       }],
-      search: ''
+      search: '',
+      fxUsername:'',
     }
   },
   methods: {
@@ -97,7 +98,8 @@ export default {
                 'dgId':this.tableData[index].dgId,
                 'dgTotal':this.tableData[index].dgTotal,
                 'dgzUsername':this.tableData[index].dgzUsername,
-                'isbn':this.tableData[index].isbn
+                'isbn':this.tableData[index].isbn,
+                'fxUsername':this.fxUsername,
               },
             }
         ).then((res) => {
@@ -112,7 +114,8 @@ export default {
   //获取订购单信息
   created() {
     const that = this;
-
+    this.fxUsername=sessionStorage.getItem('username');
+    console.log("session获取"+this.fxUsername);
     axios({
       method: 'get',
       url: 'http://127.0.0.1:8181/messager/dglist/',

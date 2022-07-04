@@ -26,12 +26,14 @@
 
     </el-table>
     <div class='button_div' >
-      <el-button @click="book()">发放</el-button>
+      <el-button @click="book()" >发放</el-button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "receivebook",
   data() {
@@ -58,6 +60,7 @@ export default {
       ],
       search: '',
       indexArray:[],
+      fxUsername:'',
     }
 
   },
@@ -70,7 +73,34 @@ export default {
       console.log(row);
     }
   },
+  //获取进书单信息
+  created() {
+    const that = this;
+    this.fxUsername=sessionStorage.getItem('username');
+    console.log("session获取："+this.fxUsername);
+    axios({
+      method: 'get',
+      url: 'http://127.0.0.1:8181/messager/receivebook/',
+    }).then(function (response) {
+      var list = eval(response.data);
+      //console.log(response.data);
+      //console.log(list.data);
+      that.tableData = list.data;
 
+      //格式化日期
+      for (let i=0; i<that.tableData.length; i++)
+      {
+        for(let j=0;j< that.tableData[i].cgDate.length;j++){
+          if( that.tableData[i].cgDate[j]<10)
+            that.tableData[i].cgDate[j]='0'+that.tableData[i].cgDate[j];
+        }
+        that.tableData[i].cgDate=that.tableData[i].cgDate[0]+'-'+that.tableData[i].cgDate[1]+'-'+
+            that.tableData[i].cgDate[2]+' '+that.tableData[i].cgDate[3]+':'+
+            that.tableData[i].cgDate[4]+':'+that.tableData[i].cgDate[5];
+      }
+
+    })
+  }
 }
 
 </script>
