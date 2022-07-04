@@ -46,9 +46,15 @@ export default {
         publish: '山东出版社',
         price: '10',
         number: '1'
+      }],
+      testData:[{
+        isbn:'9787100186438',
+        dgTotal:'1',
+        username:sessionStorage.getItem('username')
       }]
     }
   },
+
   methods: {
     //SelectionChange 用于获取多选数据
     SelectionChange(val) {
@@ -66,15 +72,18 @@ export default {
     },
     uploadForm(){
         const that = this;
-
+      console.log(sessionStorage.getItem('username'));
         //const { proxy } = getCurrentInstance();
         axios({
           method: 'post',
+          withCredentials: true,
+
+          crossDomain: true,
           url: 'http://127.0.0.1:8181/user/textorder/',
           headers:{
             'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
           },
-          data:JSON.stringify(this.dgzUser) //转换为json对象
+          data:JSON.stringify(this.testData) //转换为json对象
         }).then(function (data) {
           var list = eval(data.data);
           that.status = data.data;
@@ -89,7 +98,6 @@ export default {
   //获取初始页面
   created() {
     const that = this;
-
     //const { proxy } = getCurrentInstance();
     axios({
       method: 'get',

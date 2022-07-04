@@ -66,6 +66,8 @@ export default {
       console.log(this.account);
       console.log(this.pwd);
       console.log(this.type);
+      sessionStorage.setItem("username",this.account);
+      console.log(sessionStorage.getItem('username'));
       this.sendData();
     },
     register(event) {
@@ -86,6 +88,7 @@ export default {
             type: this.type
           }
         }).then(function (data) {
+
           var list = eval(data.data);
           that.status = data.data;
           console.log(list.data);//list.data中为后台返回的登录结果
@@ -110,6 +113,7 @@ export default {
           console.log(list.data);//list.data中为后台返回的登录结果
           if (list.data == '登录成功') {
               that.$router.push('/fxmessager');
+
           } else
             alert('登录失败！');
         })
