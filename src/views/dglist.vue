@@ -84,6 +84,7 @@ export default {
     }
   },
   methods: {
+    //将发放的书籍信息发送给后端
     provide(index, row) {
       console.log(index, row);
       if(this.tableData[index].dgAmount<=this.tableData[index].stock){
@@ -106,6 +107,7 @@ export default {
         alert("库存不足，请补充库存！");
       }
     }
+
   },
   //获取订购单信息
   created() {
@@ -116,8 +118,22 @@ export default {
       url: 'http://127.0.0.1:8181/messager/dglist/',
     }).then(function (response) {
       var list = eval(response.data);
-      console.log(list.data);
+     //console.log(response.data);
+     //console.log(list.data);
       that.tableData = list.data;
+
+      //格式化日期
+      for (let i=0; i<that.tableData.length; i++)
+      {
+        for(let j=0;j< that.tableData[i].dgDate.length;j++){
+          if( that.tableData[i].dgDate[j]<10)
+            that.tableData[i].dgDate[j]='0'+that.tableData[i].dgDate[j];
+        }
+        that.tableData[i].dgDate=that.tableData[i].dgDate[0]+'-'+that.tableData[i].dgDate[1]+'-'+
+            that.tableData[i].dgDate[2]+' '+that.tableData[i].dgDate[3]+':'+
+            that.tableData[i].dgDate[4]+':'+that.tableData[i].dgDate[5];
+      }
+
     })
   }
 }

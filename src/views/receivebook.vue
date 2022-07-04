@@ -6,15 +6,16 @@
       ||data.book_name.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%"
         height="460"
-
+        @select="selectCall"
     >
       <el-table-column type="selection" width="55" />
-      <el-table-column property="qs_id" label="缺书单号" width="180"/>
-      <el-table-column property="isbn" label="ISBN" width="220" />
-      <el-table-column property="book_name" label="书名" width="220" />
-      <el-table-column property="qs_total" label="数量" width="160" />
-      <el-table-column property="qs_username" label="经办人" width="160" />
-      <el-table-column align="left" width="285">
+      <el-table-column property="jsId" label="到书编号" width="150"/>
+      <el-table-column property="isbn" label="ISBN" width="180" />
+      <el-table-column property="cgUsername" label="采购人账号" width="170" />
+      <el-table-column property="cgDate" label="采购日期" width="220" />
+      <el-table-column property="cgTotal" label="采购总数" width="140" />
+      <el-table-column property="cgAmount" label="总额" width="140" />
+      <el-table-column align="left" width="220">
         <template #header>
           <el-input
               v-model="search"
@@ -25,7 +26,7 @@
 
     </el-table>
     <div class='button_div' >
-      <el-button @click="fun()">采购</el-button>
+      <el-button @click="book()">发放</el-button>
     </div>
   </div>
 </template>
@@ -36,28 +37,42 @@ export default {
   data() {
     return {
       tableData: [{
-        qs_id:'QS001',
-        isbn: '9787521737035',
-        book_name: '《中国美术五千年》',
-        qs_total: '50',
-        qs_username:'xiao'
+        jsId:'JS001',
+        isbn:'9787521737035',
+        cgUsername:'CG001',
+        cgDate:'2022-06-02 15:22:49',
+        cgTotal:'50',
+        cgAmount:'5000',
+        cgFlag:''
 
       },
-        { qs_id:'QS002',
-          isbn: '9787572606649',
-          book_name: '《花与药》',
-          qs_total: '20',
-          qs_username:'xiao'}
+        {
+          jsId:'',
+          isbn:'',
+          cgUsername:'',
+          cgDate:'',
+          cgTotal:'',
+          cgAmount:'',
+          cgFlag:''
+        }
       ],
-      search: ''
+      search: '',
+      indexArray:[],
     }
 
   },
+  methods:{
+    book(){
+      alert("成功发放书籍！");
+    },
+    selectCall(selection,row){
+      this.indexArray=row;
+      console.log(row);
+    }
+  },
 
-  fun(){
-
-  }
 }
+
 </script>
 
 <style scoped>
