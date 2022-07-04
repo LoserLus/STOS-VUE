@@ -114,8 +114,8 @@ export default {
     axios({
       method: 'get',
       url: 'http://127.0.0.1:8181/messager/dglist/',
-    }).then(function (data) {
-      var list = eval(data.data);
+    }).then(function (response) {
+      var list = eval(response.data);
       console.log(list.data);
       that.tableData = list.data;
     })

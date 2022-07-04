@@ -5,16 +5,16 @@
       :data="tableData.filter(data => !search || data.qs_id.toLowerCase().includes(search.toLowerCase())
       ||data.book_name.toLowerCase().includes(search.toLowerCase()))"
       style="width: 100%"
-      height="380"
+      height="460"
 
   >
     <el-table-column type="selection" width="55" />
-    <el-table-column property="qs_id" label="缺书单号" width="180%"/>
-    <el-table-column property="isbn" label="ISBN" width="280%" />
-    <el-table-column property="book_name" label="书名" width="280%" />
-    <el-table-column property="qs_total" label="数量" width="280%" />
-    <el-table-column property="qs_username" label="经办人" width="280%" />
-    <el-table-column align="center" width="200">
+    <el-table-column property="qs_id" label="缺书单号" width="180"/>
+    <el-table-column property="isbn" label="ISBN" width="220" />
+    <el-table-column property="book_name" label="书名" width="220" />
+    <el-table-column property="qs_total" label="数量" width="160" />
+    <el-table-column property="qs_username" label="经办人" width="160" />
+    <el-table-column align="left" width="285">
       <template #header>
         <el-input
             v-model="search"
@@ -24,7 +24,7 @@
     </el-table-column>
 
   </el-table>
-  <div style="margin-top: 20px">
+  <div class='button_div' >
     <el-button @click="fun()">采购</el-button>
   </div>
 </div>
@@ -61,5 +61,8 @@ fun(){
 </script>
 
 <style scoped>
-
+.button_div{
+margin-top: 10px;
+margin-left:1200px;
+}
 </style>
