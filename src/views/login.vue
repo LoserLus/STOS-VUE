@@ -118,6 +118,26 @@ export default {
             alert('登录失败！');
         })
       }
+      else if (that.type == 'D'){
+        axios({
+          method: 'get',
+          url: 'http://127.0.0.1:8181/login/cglogin',
+          params: {
+            username: this.account,
+            pwd: this.pwd,
+            type: this.type
+          }
+        }).then(function (data) {
+          var list = eval(data.data);
+          that.status = data.data;
+          console.log(list.data);//list.data中为后台返回的登录结果
+          if (list.data == '登录成功') {
+            that.$router.push('/purchaser');
+
+          } else
+            alert('登录失败！');
+        })
+      }
     }
   }
 }
