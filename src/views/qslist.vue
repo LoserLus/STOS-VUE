@@ -9,11 +9,11 @@
       @selection-change="changeData"
   >
     <el-table-column type="selection" width="55" />
-    <el-table-column property="qs_id" label="缺书单号" width="250"/>
+    <el-table-column property="qsId" label="缺书单号" width="250"/>
     <el-table-column property="isbn" label="ISBN" width="300" />
-    <el-table-column property="book_name" label="书名" width="280" />
-    <el-table-column property="qs_total" label="数量" width="230" />
-    <el-table-column property="qs_username" label="经办人" width="200" />
+    <el-table-column property="bookName" label="书名" width="280" />
+    <el-table-column property="qsTotal" label="数量" width="230" />
+    <el-table-column property="qsUsername" label="经办人" width="200" />
     <el-table-column align="left" width="330">
       <template #header>
         <el-input
@@ -32,51 +32,37 @@
 
 <script>
 import axios from "axios";
+import Vue from "vue";
 
 export default {
   name: "qslist",
   data() {
     return {
-      tableData: [{
-        qs_id:'QS001',
-        isbn: '9787521737035',
-        book_name: '《中国美术五千年》',
-        qs_total: '50',
-        qs_username:'xiao'
-
-      },
-        { qs_id:'QS002',
-        isbn: '9787572606649',
-        book_name: '《花与药》',
-        qs_total: '20',
-        qs_username:'xiao'},
-    { qs_id:'QS003',
-        isbn: '9787572606649',
-        book_name: '《花与药》',
-        qs_total: '10',
-        qs_username:'xiao'}
-      ],
+      tableData: [],
 
       search: '',
-      selectData:[],
+      list:[],
     }
 
   },
-
-methods:{
+mounted() {
+  this.initData();
+},
+  methods:{
   saleBook(){
     let _this=this;
     /*这里是发送请求
     * salebook 是后端controller 的请求URL
     * post 请求
     * 需要有 书籍实体类
-    *
+    *  接口在哪  shuju ne
     * */
-    axios.post("http://localhost:8181/salebook",_this.selectData).then(res=>{
-    if (res.code==200){
+    axios.post("api/messager/purchase",_this.list).then(res=>{
+
+      if (res.code==200){
       for (let i =0;i<this.tableData.length;i++){
-        for (let j =0;j<this.selectData.length;j++){
-          if (this.tableData[i]==this.selectData[j]){
+        for (let j =0;j<this.list.length;j++){
+          if (this.tableData[i]==this.list[j]){
             this.tableData.splice(i,1);
           }
         }
@@ -87,9 +73,17 @@ methods:{
 
   },
   changeData(val){
-    console.log(val);
-    this.selectData=val;
-  }
+
+    this.list=val;
+    Vue.delete(this.list,'bookName')
+    console.log(this.list);
+  },
+    initData(){
+    let _this =this;
+    axios.get("api/messager/getLockB").then(res=>{
+      _this.tableData=res.data.data;
+    })
+    }
 }
 }
 </script>
