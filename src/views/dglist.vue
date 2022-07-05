@@ -5,8 +5,8 @@
         || data.bookName.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%"
 Updated upstream
-        height="510"
-        max-height="600">
+        height="460"
+        max-height="460">
 
         height="400"
         max-height="400">
@@ -65,6 +65,11 @@ Updated upstream
         </template>
       </el-table-column>
     </el-table>
+
+    <div class='button_div' >
+      <el-button type="primary"  @click="book()" >采购</el-button>
+    </div>
+
   </div>
 </template>
 
@@ -83,7 +88,7 @@ export default {
         dgDate:'',
         dgTotal:'',
         stock:'',
-        dgAmount:''
+        dgAmount:'',
       }],
       search: '',
       fxUsername:'',
@@ -92,42 +97,63 @@ export default {
   methods: {
     //将发放的书籍信息发送给后端
     provide(index, row) {
-      console.log(index, row);
+      const that=this;
+
+      //要发送的值
+      var dgData= {
+          "bookName": that.tableData[index].bookName,
+          "dgAmount": that.tableData[index].dgAmount,
+          "dgId": that.tableData[index].dgId,
+          "dgTotal": that.tableData[index].dgTotal,
+          "dgzUsername": that.tableData[index].dgzUsername,
+          "fxUsername": that.fxUsername,
+          "isbn": that.tableData[index].isbn,
+          "stock": that.tableData[index].stock
+        };
+
       if(this.tableData[index].dgAmount<=this.tableData[index].stock){
-        axios.get('/api/messager/release/',
-            {
-              params:{
-                'bookName':this.tableData[index].bookName,
-                'dgAmount':this.tableData[index].dgAmount,
-                'dgDate':this.tableData[index].dgDate,
-                'dgId':this.tableData[index].dgId,
-                'dgTotal':this.tableData[index].dgTotal,
-                'dgzUsername':this.tableData[index].dgzUsername,
-                'isbn':this.tableData[index].isbn,
-                'fxUsername':this.fxUsername,
-              },
-            }
-        ).then((res) => {
-          console.log(res)
+
+        axios({
+          method: 'post',
+          url: '/api/messager/release/',
+          headers:{
+            'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
+          },
+          data:dgData //转换为json对象
+        }).then(function (response) {
+          console.log(response.status);
+          if(response.status==200)
+            alert("发放成功！");
+            location.reload();
         })
+
       }else{
         alert("库存不足，请补充库存！");
       }
+    },
+    book(){
+      //有订单满足可以发放的要求，要先发
+      for(let i=0;i<this.tableData.length;i++){
+        if(this.tableData[i].dgAmount<=this.tableData[i].stock){
+          alert("有可发放的订单，请先发放！");
+          return;
+        }
+      }
+      //剩下的都是库存不足需要补货的，发到缺书单
+      
     }
 
   },
   //获取订购单信息
   created() {
     const that = this;
-    this.fxUsername=sessionStorage.getItem('username');
-    console.log("session获取"+this.fxUsername);
+    that.fxUsername=sessionStorage.getItem('username');
     axios({
       method: 'get',
       url: '/api/messager/dglist/',
     }).then(function (response) {
       var list = eval(response.data);
-     //console.log(response.data);
-     //console.log(list.data);
+
       that.tableData = list.data;
 
       //格式化日期
@@ -148,5 +174,8 @@ export default {
 </script>
 
 <style scoped>
-
+.button_div{
+  margin-top: 15px;
+  margin-left:1200px;
+}
 </style>
