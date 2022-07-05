@@ -8,6 +8,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import VueAxios from 'vue-axios'
 import VueCookies from 'vue-cookies'
+import './mock/index.js'
 axios.defaults.withCredentials = true;
 
 
