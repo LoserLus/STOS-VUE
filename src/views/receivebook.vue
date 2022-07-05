@@ -87,18 +87,6 @@ export default {
       //console.log(list.data);
       that.tableData = list.data;
 
-      //格式化日期
-      for (let i=0; i<that.tableData.length; i++)
-      {
-        for(let j=0;j< that.tableData[i].cgDate.length;j++){
-          if( that.tableData[i].cgDate[j]<10)
-            that.tableData[i].cgDate[j]='0'+that.tableData[i].cgDate[j];
-        }
-        that.tableData[i].cgDate=that.tableData[i].cgDate[0]+'-'+that.tableData[i].cgDate[1]+'-'+
-            that.tableData[i].cgDate[2]+' '+that.tableData[i].cgDate[3]+':'+
-            that.tableData[i].cgDate[4]+':'+that.tableData[i].cgDate[5];
-      }
-
     })
   }
 }

@@ -144,7 +144,8 @@ export default {
       for(let i=0;i<this.tableData.length;i++){
         list[i]={
           'isbn':this.tableData[i].isbn,
-          'qsTotal':this.tableData[i].dgTotal-this.tableData[i].stock
+          'qsTotal':this.tableData[i].dgTotal-this.tableData[i].stock,
+          'dgId':this.tableData[i].dgId,
         };
       }
 
