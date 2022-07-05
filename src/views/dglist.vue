@@ -67,7 +67,7 @@ Updated upstream
     </el-table>
 
     <div class='button_div' >
-      <el-button type="primary"  @click="book()" >采购</el-button>
+      <el-button type="primary"  @click="book()" >补货</el-button>
     </div>
 
   </div>
@@ -140,7 +140,28 @@ export default {
         }
       }
       //剩下的都是库存不足需要补货的，发到缺书单
-      
+      var list=[{}];
+      for(let i=0;i<this.tableData.length;i++){
+        list[i]={
+          'isbn':this.tableData[i].isbn,
+          'qsTotal':this.tableData[i].dgTotal-this.tableData[i].stock
+        };
+      }
+
+      axios({
+        method: 'post',
+        url: '/api/messager/sendLockB/',
+        headers:{
+          'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
+        },
+        data:JSON.stringify(list) //转换为json对象
+      }).then(function (response) {
+        console.log(response.status);
+        if(response.status==200)
+          alert("已发送补货信息！");
+        location.reload();
+      })
+
     }
 
   },
@@ -157,7 +178,7 @@ export default {
       that.tableData = list.data;
 
       //格式化日期
-      for (let i=0; i<that.tableData.length; i++)
+      /*for (let i=0; i<that.tableData.length; i++)
       {
         for(let j=0;j< that.tableData[i].dgDate.length;j++){
           if( that.tableData[i].dgDate[j]<10)
@@ -166,7 +187,7 @@ export default {
         that.tableData[i].dgDate=that.tableData[i].dgDate[0]+'-'+that.tableData[i].dgDate[1]+'-'+
             that.tableData[i].dgDate[2]+' '+that.tableData[i].dgDate[3]+':'+
             that.tableData[i].dgDate[4]+':'+that.tableData[i].dgDate[5];
-      }
+      }*/
 
     })
   }
