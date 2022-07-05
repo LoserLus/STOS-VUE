@@ -94,7 +94,7 @@ export default {
     provide(index, row) {
       console.log(index, row);
       if(this.tableData[index].dgAmount<=this.tableData[index].stock){
-        axios.get('http://127.0.0.1:8181/messager/release/',
+        axios.get('/api/messager/release/',
             {
               params:{
                 'bookName':this.tableData[index].bookName,
@@ -123,7 +123,7 @@ export default {
     console.log("session获取"+this.fxUsername);
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:8181/messager/dglist/',
+      url: '/api/messager/dglist/',
     }).then(function (response) {
       var list = eval(response.data);
      //console.log(response.data);

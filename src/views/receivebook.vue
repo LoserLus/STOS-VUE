@@ -80,7 +80,7 @@ export default {
     console.log("session获取："+this.fxUsername);
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:8181/messager/receivebook/',
+      url: '/api/messager/receivebook/',
     }).then(function (response) {
       var list = eval(response.data);
       //console.log(response.data);

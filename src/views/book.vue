@@ -91,7 +91,7 @@ export default {
         //const { proxy } = getCurrentInstance();
         axios({
           method: 'post',
-          url: 'http://127.0.0.1:8181/user/textorder/',
+          url: '/api/user/textorder/',
           headers: {
             'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
           },
@@ -114,7 +114,7 @@ export default {
     //const { proxy } = getCurrentInstance();
     axios({
       method: 'get',
-      url: 'http://127.0.0.1:8181/user/textlist/',
+      url: '/api/user/textlist/',
     }).then(function (response) {
       let list = eval(response.data);
       console.log(list.data);

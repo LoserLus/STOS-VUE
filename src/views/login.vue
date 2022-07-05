@@ -104,7 +104,7 @@ export default {
       else if (that.type == 'C'){
         axios({
           method: 'get',
-          url: 'http://127.0.0.1:8181/login/fxlogin',
+          url: '/api/login/fxlogin',
           params: {
             username: this.account,
             pwd: this.pwd,
@@ -125,7 +125,7 @@ export default {
       else if (that.type == 'D'){
         axios({
           method: 'get',
-          url: 'http://127.0.0.1:8181/login/cglogin',
+          url: '/api/login/cglogin',
           params: {
             username: this.account,
             pwd: this.pwd,

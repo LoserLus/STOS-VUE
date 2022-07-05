@@ -113,7 +113,7 @@ export default {
       //const { proxy } = getCurrentInstance();
       axios({
         method: 'post',
-        url: 'http://127.0.0.1:8181/user/register/',
+        url: '/api/user/register/',
         headers:{
           'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
         },
