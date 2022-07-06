@@ -58,16 +58,7 @@ mounted() {
     *  接口在哪  shuju ne
     * */
     axios.post("api/messager/purchase",_this.list).then(res=>{
-
-      if (res.code==200){
-      for (let i =0;i<this.tableData.length;i++){
-        for (let j =0;j<this.list.length;j++){
-          if (this.tableData[i]==this.list[j]){
-            this.tableData.splice(i,1);
-          }
-        }
-      }
-    }
+      location.reload();
     })
 
 
@@ -75,8 +66,6 @@ mounted() {
   changeData(val){
 
     this.list=val;
-    Vue.delete(this.list,'bookName')
-    console.log(this.list);
   },
     initData(){
     let _this =this;

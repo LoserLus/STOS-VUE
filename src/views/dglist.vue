@@ -4,13 +4,10 @@
         :data="tableData.filter(data => !search || data.dgzUsername.toLowerCase().includes(search.toLowerCase())
         || data.bookName.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%"
-Updated upstream
+        Updated upstream
         height="460"
         max-height="460">
 
-        height="400"
-        max-height="400">
- Stashed changes
       <el-table-column
           width="120"
           label="订购单号"
@@ -178,17 +175,6 @@ export default {
 
       that.tableData = list.data;
 
-      //格式化日期
-      /*for (let i=0; i<that.tableData.length; i++)
-      {
-        for(let j=0;j< that.tableData[i].dgDate.length;j++){
-          if( that.tableData[i].dgDate[j]<10)
-            that.tableData[i].dgDate[j]='0'+that.tableData[i].dgDate[j];
-        }
-        that.tableData[i].dgDate=that.tableData[i].dgDate[0]+'-'+that.tableData[i].dgDate[1]+'-'+
-            that.tableData[i].dgDate[2]+' '+that.tableData[i].dgDate[3]+':'+
-            that.tableData[i].dgDate[4]+':'+that.tableData[i].dgDate[5];
-      }*/
 
     })
   }

@@ -1,14 +1,12 @@
 <template>
   <div class="receive">
     <el-table
-        ref="multipleTableRef"
-        :data="tableData.filter(data => !search || data.qs_id.toLowerCase().includes(search.toLowerCase())
-      ||data.book_name.toLowerCase().includes(search.toLowerCase()))"
+        :data="tableData.filter(data => !search || data.isbn.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%"
+        Updated upstream
         height="460"
-        @select="selectCall"
+        max-height="460"
     >
-      <el-table-column type="selection" width="55" />
       <el-table-column property="jsId" label="到书编号" width="150"/>
       <el-table-column property="isbn" label="ISBN" width="180" />
       <el-table-column property="cgUsername" label="采购人账号" width="170" />
@@ -26,7 +24,7 @@
 
     </el-table>
     <div class='button_div' >
-      <el-button @click="book()" >发放</el-button>
+      <el-button type="primary" @click="book()" >确定</el-button>
     </div>
   </div>
 </template>
@@ -39,16 +37,6 @@ export default {
   data() {
     return {
       tableData: [{
-        jsId:'JS001',
-        isbn:'9787521737035',
-        cgUsername:'CG001',
-        cgDate:'2022-06-02 15:22:49',
-        cgTotal:'50',
-        cgAmount:'5000',
-        cgFlag:''
-
-      },
-        {
           jsId:'',
           isbn:'',
           cgUsername:'',
@@ -58,35 +46,41 @@ export default {
           cgFlag:''
         }
       ],
-      search: '',
-      indexArray:[],
-      fxUsername:'',
+      search: ''
     }
 
   },
   methods:{
     book(){
-      alert("成功发放书籍！");
-    },
-    selectCall(selection,row){
-      this.indexArray=row;
-      console.log(row);
+
+      axios({
+        method: 'get',
+        url: '/api/messager//',
+      }).then(function (response) {
+
+        if(response.status==200)
+          alert("已确定！");
+        location.reload();
+      })
+
+
     }
   },
   //获取进书单信息
   created() {
     const that = this;
-    this.fxUsername=sessionStorage.getItem('username');
-    console.log("session获取："+this.fxUsername);
     axios({
       method: 'get',
-      url: '/api/messager/receivebook/',
+      url: '/api/messager/testOk/',
     }).then(function (response) {
       var list = eval(response.data);
-      //console.log(response.data);
-      //console.log(list.data);
-      that.tableData = list.data;
-
+      that.tableData=list.data;
+      for (let i=0;i<that.tableData.length;i++){
+        //删除未采购的订单
+        if(that.tableData[i].cgFlag==0)
+          delete that.tableData[i];
+      }
+      console.log(that.tableData);
     })
   }
 }
