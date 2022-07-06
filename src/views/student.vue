@@ -20,8 +20,10 @@
 
 </template>
 
-<script>
+<script >
 import NavMenu from '../views/NavMenu/stnavmenu';
+
+
 
 export default {
   name: "student",
