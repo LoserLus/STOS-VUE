@@ -31,7 +31,10 @@ export default {
   name: 'jslist',
   data() {
     return {
-
+      tableData: [{
+        isbn: '456789',
+        cgTotal: '8',
+      }],
       testData: [{
         isbn: '',
         cgTotal: ''
@@ -49,6 +52,7 @@ export default {
 
 
     caigou(index, row) {
+
       const that = this;
       this.caigouData=[{
         "cgNumber":that.tableData[index].cgNumber,
@@ -79,6 +83,13 @@ export default {
       let list = eval(response.data);
       console.log(list.data);
       that.tableData = list.data;
+
+      for(let i=0;i<that.tableData.length;i++){
+        if(that.tableData[i].cgFlag==1)
+          delete that.tableData[i];
+
+      }
+      console.log(that.tableData);
     })
   }
 }
