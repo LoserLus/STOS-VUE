@@ -52,15 +52,27 @@ export default {
   },
   methods:{
     book(){
+    const that=this;
+      var list=[];
 
+      for(let i=0;i<that.tableData.length;i++){
+        if(that.tableData[i]!=null)
+          list.push(that.tableData[i].jsId);
+      }
+
+      console.log(list);
       axios({
-        method: 'get',
-        url: '/api/messager//',
+        method: 'post',
+        url: '/api/messager/deleteJslist/',
+        headers:{
+          'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
+        },
+        data:JSON.stringify(list) //转换为json对象
       }).then(function (response) {
 
         if(response.status==200)
           alert("已确定！");
-        location.reload();
+       location.reload();
       })
 
 
@@ -80,7 +92,7 @@ export default {
         if(that.tableData[i].cgFlag==0)
           delete that.tableData[i];
       }
-      console.log(that.tableData);
+
     })
   }
 }
