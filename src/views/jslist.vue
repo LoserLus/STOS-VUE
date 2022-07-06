@@ -70,6 +70,7 @@ export default {
       }).then(function (response){
         console.log(response);
       })
+      alert('采购成功')
     }
   },
 

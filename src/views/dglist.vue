@@ -108,7 +108,7 @@ export default {
           "stock": that.tableData[index].stock
         };
 
-      if(this.tableData[index].dgAmount<=this.tableData[index].stock){
+      if(this.tableData[index].dgTotal<=this.tableData[index].stock){
 
         axios({
           method: 'post',
