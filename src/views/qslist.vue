@@ -64,7 +64,6 @@ mounted() {
 
   },
   changeData(val){
-
     this.list=val;
   },
     initData(){

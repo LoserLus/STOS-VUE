@@ -6,13 +6,25 @@ import store from './store'
 import axios from "axios";
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import * as icons from '@element-plus/icons'
+
 import VueAxios from 'vue-axios'
 import VueCookies from 'vue-cookies'
 import './mock/index.js'
 axios.defaults.withCredentials = true;
 
 
-const app=createApp(App).use(store).use(VueAxios,axios).use(router).use(ElementPlus).use(VueCookies).mount('#app')
+let app=createApp(App)
+
+for(const [key,componet] of Object.entries(icons)){
+	app.component(key,componet)
+}
+app.use(store)
+app.use(VueAxios,axios)
+app.use(router)
+app.use(ElementPlus)
+app.use(VueCookies)
+app.mount('#app')
 //App.config.globalProperties.$cookies = VueCookies
 
 router.beforeEach((to,from,next)=>{

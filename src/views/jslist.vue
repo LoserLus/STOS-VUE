@@ -88,7 +88,6 @@ export default {
       for(let i=0;i<that.tableData.length;i++){
         if(that.tableData[i].cgFlag==1)
           delete that.tableData[i];
-
       }
       console.log(that.tableData);
     })
