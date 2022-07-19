@@ -182,7 +182,7 @@ export default {
       url: '/api/messager/dglist/',
     }).then(response=> {
       console.log(response);
-      //this.tableData=response.data.data;
+      this.tableData=response.data.data;
     })
   }
 }
