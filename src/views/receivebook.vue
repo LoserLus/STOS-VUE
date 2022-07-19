@@ -18,7 +18,7 @@
           <el-input
               v-model="search"
               size="mini"
-              placeholder=""/>
+              placeholder="检索ISBN"/>
         </template>
       </el-table-column>
 
