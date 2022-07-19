@@ -3,12 +3,12 @@
     <div class="register-container">
       <div class="head">
         <div class="name">
-          <div class="title">用户账号注册</div>
+          <div class="title">用户注册</div>
         </div>
       </div>
       <el-form label-position="top" class="register-form">
         <el-form-item label="账号">
-          <el-input type="text" v-model="dgzUser.dgzUsername" autocomplete="off"></el-input>
+          <el-input placeholder="请输入登录名称" type="text" v-model="dgzUser.dgzUsername" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="姓名">
           <el-input type="text" v-model="dgzUser.dgzName" autocomplete="off"></el-input>

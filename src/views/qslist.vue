@@ -8,13 +8,13 @@
       height="470"
       @selection-change="changeData"
   >
-    <el-table-column type="selection" width="55" />
-    <el-table-column property="qsId" label="缺书单号" width="250"/>
-    <el-table-column property="isbn" label="ISBN" width="300" />
-    <el-table-column property="bookName" label="书名" width="280" />
-    <el-table-column property="qsTotal" label="数量" width="230" />
-    <el-table-column property="qsUsername" label="经办人" width="200" />
-    <el-table-column align="left" width="330">
+    <el-table-column type="selection" width="%55" />
+    <el-table-column property="qsId" label="缺书单号" width="%250"/>
+    <el-table-column property="isbn" label="ISBN" width="%300" />
+    <el-table-column property="bookName" label="书名" width="%280" />
+    <el-table-column property="qsTotal" label="数量" width="%230" />
+    <el-table-column property="qsUsername" label="经办人" width="%200" />
+    <el-table-column align="left" width="%330">
       <template #header>
         <el-input
             v-model="search"
@@ -25,7 +25,7 @@
 
   </el-table>
   <div class='button_div' >
-    <el-button @click="saleBook()">采购</el-button>
+    <el-button  type="primary" @click="saleBook()">采购</el-button>
   </div>
 </div>
 </template>
@@ -55,7 +55,7 @@ mounted() {
     * salebook 是后端controller 的请求URL
     * post 请求
     * 需要有 书籍实体类
-    *  接口在哪  shuju ne
+    *
     * */
     axios.post("api/messager/purchase",_this.list).then(res=>{
       location.reload();
@@ -78,7 +78,7 @@ mounted() {
 
 <style scoped>
 .button_div{
-margin-top: 5px;
-margin-left:1600px;
+  margin-top: 5px;
+  float:right;
 }
 </style>
