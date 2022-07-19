@@ -97,7 +97,7 @@ export default {
         publish: '',
         price: '',
       },
-      books:'',
+      books:[this.book,],
       search:'',
       showForm:false,
       formData:'',
