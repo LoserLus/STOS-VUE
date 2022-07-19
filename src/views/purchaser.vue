@@ -31,16 +31,21 @@
 			</el-header>
 
 			<el-container>
+				<!-- 侧边栏 -->
 				<el-aside width="200px">
 					<NavMenu></NavMenu>
 				</el-aside>
-				<el-main>
-					<router-view></router-view>
+
+				<el-main id="mainview">
+					<div id="huanying">欢迎进入教材管理系统</div>
 					<!--路由出口 -->
+					<router-view></router-view>
+
+
 				</el-main>
 			</el-container>
 
-			<el-footer>@STOS-采购员系统</el-footer>
+			<el-footer id="foot">采购人员采购界面</el-footer>
 		</el-container>
 
 	</div>
@@ -59,28 +64,28 @@
 				this.delCookie();
 				this.$router.push("/");
 			},
-			 delCookie() {
-			      var cookies = document.cookie.split(";");
-			      for (var i = 0; i < cookies.length; i++) {
-			        var cookie = cookies[i];
-			        var eqPos = cookie.indexOf("=");
-			        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-			        document.cookie =
-			          name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-			      }
-			      if (cookies.length > 0) {
-			        for (var i = 0; i < cookies.length; i++) {
-			          var cookie = cookies[i];
-			          var eqPos = cookie.indexOf("=");
-			          var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-			          var domain = location.host.substr(location.host.indexOf("."));
-			          document.cookie =
-			            name +
-			            "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" +
-			            domain;
-			        }
-			      }
-			    }
+			delCookie() {
+				var cookies = document.cookie.split(";");
+				for (var i = 0; i < cookies.length; i++) {
+					var cookie = cookies[i];
+					var eqPos = cookie.indexOf("=");
+					var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+					document.cookie =
+						name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+				}
+				if (cookies.length > 0) {
+					for (var i = 0; i < cookies.length; i++) {
+						var cookie = cookies[i];
+						var eqPos = cookie.indexOf("=");
+						var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+						var domain = location.host.substr(location.host.indexOf("."));
+						document.cookie =
+							name +
+							"=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" +
+							domain;
+					}
+				}
+			}
 		}
 	}
 </script>
@@ -123,5 +128,24 @@
 
 	#rightxiala {
 		margin-top: 30px;
+	}
+
+	#mainview {
+		background-color: #FFFFFF;
+	}
+
+	#huanying {
+		font-size: 25px;
+		color: gray;
+		font-family: 宋体;
+		/* font-weight: bolder; */
+
+	}
+
+	#foot {
+		font-size: 25px;
+		color: gray;
+		font-family: 宋体;
+		font-weight: bolder;
 	}
 </style>
