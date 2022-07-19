@@ -55,7 +55,7 @@
           <el-input
               v-model="search"
               size="mini"
-              placeholder=""/>
+              placeholder="根据用户名或书名检索"/>
         </template>
         <template #default="scope">
           <el-button size="mini" @click="provide(scope.$index, scope.row)">发放</el-button>

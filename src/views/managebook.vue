@@ -2,7 +2,7 @@
   <div class="mangebook">
     <el-table
         :data="books.filter(data => !search || data.bookName.toLowerCase().includes(search.toLowerCase())
-        || data.bookName.toLowerCase().includes(search.toLowerCase()))"
+        || data.author.toLowerCase().includes(search.toLowerCase()))"
         style="width: 100%"
         Updated upstream
         height="460"
@@ -44,7 +44,7 @@
           <el-input
               v-model="search"
               size="mini"
-              placeholder="搜索图书"/>
+              placeholder="根据书名或作者检索图书"/>
         </template>
       </el-table-column>
 
@@ -97,7 +97,7 @@ export default {
         publish: '',
         price: '',
       },
-      books:'',
+      books:[this.book,],
       search:'',
       showForm:false,
       formData:'',
