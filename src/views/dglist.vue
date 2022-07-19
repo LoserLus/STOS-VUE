@@ -77,7 +77,7 @@ export default {
   name:"dglist",
   data() {
     return {
-      tableData: [{
+      dgList:{
         dgId:'',
         dgzUsername:'',
         isbn:'',
@@ -86,42 +86,54 @@ export default {
         dgTotal:'',
         stock:'',
         dgAmount:'',
-      }],
+      },
+      tableData: [
+          this.dgList,
+      ],
       search: '',
       fxUsername:'',
     }
   },
   methods: {
+    getDgList(){
+      axios({
+        method: 'get',
+        url: '/api/messager/dglist/',
+      }).then(response=>{
+        console.log(response)
+        this.tableData = response.data.data;
+      })
+    },
     //将发放的书籍信息发送给后端
     provide(index, row) {
       const that=this;
+      // var dgData= {
+      //     "bookName": that.tableData[index].bookName,
+      //     "dgAmount": that.tableData[index].dgAmount,
+      //     "dgId": that.tableData[index].dgId,
+      //     "dgTotal": that.tableData[index].dgTotal,
+      //     "dgzUsername": that.tableData[index].dgzUsername,
+      //     "fxUsername": that.fxUsername,
+      //     "isbn": that.tableData[index].isbn,
+      //     "stock": that.tableData[index].stock
+      //   };
 
-      //要发送的值
-      var dgData= {
-          "bookName": that.tableData[index].bookName,
-          "dgAmount": that.tableData[index].dgAmount,
-          "dgId": that.tableData[index].dgId,
-          "dgTotal": that.tableData[index].dgTotal,
-          "dgzUsername": that.tableData[index].dgzUsername,
-          "fxUsername": that.fxUsername,
-          "isbn": that.tableData[index].isbn,
-          "stock": that.tableData[index].stock
-        };
-
-      if(this.tableData[index].dgTotal<=this.tableData[index].stock){
-
+      if(row.dgTotal<=row.stock){
+        //要发送的值
+        let dgData = row;
+        dgData.fxUsername='';//username由后台根据cookie自动补充
         axios({
           method: 'post',
           url: '/api/messager/release/',
           headers:{
             'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
           },
-          data:dgData //转换为json对象
-        }).then(function (response) {
+          data:JSON.stringify(dgData) //转换为json对象
+        }).then(response=>{
           console.log(response.status);
           if(response.status==200)
             alert("发放成功！");
-            location.reload();
+            this.getDgList();
         })
 
       }else{
@@ -137,7 +149,7 @@ export default {
         }
       }
       //剩下的都是库存不足需要补货的，发到缺书单
-      var list=[{}];
+      let list=[{}];
       for(let i=0;i<this.tableData.length;i++){
         list[i]={
           'isbn':this.tableData[i].isbn,
@@ -153,29 +165,24 @@ export default {
           'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
         },
         data:JSON.stringify(list) //转换为json对象
-      }).then(function (response) {
+      }).then(response=> {
         console.log(response.status);
         if(response.status==200)
           alert("已发送补货信息！");
-        location.reload();
+        this.getDgList();
+        //location.reload();
       })
-
     }
-
   },
   //获取订购单信息
   created() {
-    const that = this;
-    that.fxUsername=sessionStorage.getItem('username');
+    //this.fxUsername=sessionStorage.getItem('username');
     axios({
       method: 'get',
       url: '/api/messager/dglist/',
-    }).then(function (response) {
-      var list = eval(response.data);
-
-      that.tableData = list.data;
-
-
+    }).then(response=> {
+      console.log(response);
+      //this.tableData=response.data.data;
     })
   }
 }
