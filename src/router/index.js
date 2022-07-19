@@ -83,6 +83,11 @@ const routes = [
         path:'/fxmessager/receivebook',
         name:'receivebook',
         component:()=>import(/* webpackChunkName: "about" */ '../views/receivebook')
+      },
+      {
+        path:'/fxmessager/managebook',
+        name:'managebook',
+        component:()=>import('../views/managebook')
       }
     ]
   },

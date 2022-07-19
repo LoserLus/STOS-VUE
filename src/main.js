@@ -14,10 +14,10 @@ import './mock/index.js'
 axios.defaults.withCredentials = true;
 
 
-let app=createApp(App)
+const app=createApp(App)
 
-for(const [key,componet] of Object.entries(icons)){
-	app.component(key,componet)
+for (const [key, component] of Object.entries(icons)) {
+    app.component(key, component)
 }
 app.use(store)
 app.use(VueAxios,axios)

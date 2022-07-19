@@ -93,6 +93,7 @@ export default {
           method: 'post',
           url: '/api/user/textorder/',
           headers: {
+            //'Content-Type':'text/plain'
             'Content-Type': 'application/json' //传递数据为json时必须加上,否则服务器不识别报415
           },
           data: JSON.stringify(that.val) //转换为json对象

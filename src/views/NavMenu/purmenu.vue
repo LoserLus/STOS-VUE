@@ -12,7 +12,13 @@
 
 <script>
 export default {
-  name: "purmenu"
+  name: "purmenu",
+  methods: {
+
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    }
+  },
 }
 </script>
 
