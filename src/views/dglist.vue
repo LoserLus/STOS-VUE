@@ -106,18 +106,6 @@ export default {
     },
     //将发放的书籍信息发送给后端
     provide(index, row) {
-      const that=this;
-      // var dgData= {
-      //     "bookName": that.tableData[index].bookName,
-      //     "dgAmount": that.tableData[index].dgAmount,
-      //     "dgId": that.tableData[index].dgId,
-      //     "dgTotal": that.tableData[index].dgTotal,
-      //     "dgzUsername": that.tableData[index].dgzUsername,
-      //     "fxUsername": that.fxUsername,
-      //     "isbn": that.tableData[index].isbn,
-      //     "stock": that.tableData[index].stock
-      //   };
-
       if(row.dgTotal<=row.stock){
         //要发送的值
         let dgData = row;
